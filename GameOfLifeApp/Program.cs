@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using GameOfLifeApp;
+
+var data = new GameLogic();
+data.SetUpField();
+
+while (true)
+{
+    Display.ShowData(data);
+}
