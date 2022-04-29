@@ -21,7 +21,7 @@ namespace GameOfLifeApp
             {
                 for (int column = 0; column < gameLogic.countOfColumns; column++)
                 {
-                    Console.WriteLine(gameLogic.currentField[row,column] ? "$" : "*");
+                    Console.Write(gameLogic.currentField[row,column] ? "$" : "*");
                 }
                 Console.WriteLine();
             }
