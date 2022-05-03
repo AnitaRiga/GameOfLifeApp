@@ -8,24 +8,27 @@ namespace GameOfLifeApp
 {
     public class GameLogic
     {
+        /// <summary>
+        /// Declares a 2D array without specifying its size.   
+        /// </summary>
         bool[,] generatedField;
 
         /// <summary>
         /// Holds user data of array size.    
         /// </summary>
-        public int countOfRows { get; set; }
-        public int countOfColumns { get; set; }
-        public bool[,] currentField { get; set; }
+        public int CountOfRows { get; set; }
+        public int CountOfColumns { get; set; }
+        public bool[,] CurrentField { get; set; }
 
         /// <summary>
-        /// Gets data from user.
+        /// User defines array size.
         /// </summary>
         public GameLogic()
         {
-            countOfRows = Communicator.GetBoundedResponse("Please input number of rows.", 2, 100);
-            countOfColumns = Communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
-            currentField = new bool[countOfRows, countOfColumns];
-            generatedField = new bool[countOfRows, countOfColumns];
+            CountOfRows = Communicator.GetBoundedResponse("Please input number of rows.", 2, 100);
+            CountOfColumns = Communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
+            CurrentField = new bool[CountOfRows, CountOfColumns];
+            generatedField = new bool[CountOfRows, CountOfColumns];
         }
 
         /// <summary>
@@ -34,11 +37,11 @@ namespace GameOfLifeApp
         public void SetUpField()
         {
             Random random = new Random();
-            for (int row = 0; row < countOfRows; row++)
+            for (int row = 0; row < CountOfRows; row++)
             {
-                for (int column = 0; column < countOfColumns; column++)
+                for (int column = 0; column < CountOfColumns; column++)
                 {
-                    currentField[row, column] = random.Next(0, 2) == 0;
+                    CurrentField[row, column] = random.Next(0, 2) == 0;
                 }
             }
         }
@@ -60,9 +63,9 @@ namespace GameOfLifeApp
                     int actualColumn;
                     if (row < 0)
                     {
-                        actualRow = currentField.GetLength(0) - 1;
+                        actualRow = CurrentField.GetLength(0) - 1;
                     }
-                    else if (row == currentField.GetLength(0))
+                    else if (row == CurrentField.GetLength(0))
                     {
                         actualRow = 0;
                     }
@@ -72,9 +75,9 @@ namespace GameOfLifeApp
                     }
                     if (column < 0)
                     {
-                        actualColumn = currentField.GetLength(1) - 1;
+                        actualColumn = CurrentField.GetLength(1) - 1;
                     }
-                    else if (column == currentField.GetLength(1))
+                    else if (column == CurrentField.GetLength(1))
                     {
                         actualColumn = 0;
                     }
@@ -82,10 +85,10 @@ namespace GameOfLifeApp
                     {
                         actualColumn = column;
                     }
-                    count += currentField[actualRow, actualColumn] ? 1 : 0;
+                    count += CurrentField[actualRow, actualColumn] ? 1 : 0;
                 }
             }
-            count -= currentField[currentRow, currentColumn] ? 1 : 0;
+            count -= CurrentField[currentRow, currentColumn] ? 1 : 0;
 
             return count;
         }
@@ -114,14 +117,14 @@ namespace GameOfLifeApp
         /// </summary>
         public void GetNextGeneration()
         {
-            for (int row = 0; row < countOfRows; row++)
+            for (int row = 0; row < CountOfRows; row++)
             {
-                for (int column = 0; column < countOfColumns; column++)
+                for (int column = 0; column < CountOfColumns; column++)
                 {
                     int count = NeighboursCount(row, column);
-                    bool value = GetCellOffsprings(count, currentField[row, column]);  
+                    bool value = GetCellOffsprings(count, CurrentField[row, column]);  
 
-                    generatedField[row, column] = value;
+                    generatedField[row, column] = value;                    
                 }
             }
         }
@@ -131,11 +134,11 @@ namespace GameOfLifeApp
         /// </summary>
         public void TransferNextGenerations()
         {
-            for (int row = 0; row < countOfRows; row++)
+            for (int row = 0; row < CountOfRows; row++)
             {
-                for (int column = 0; column < countOfColumns; column++)
+                for (int column = 0; column < CountOfColumns; column++)
                 {
-                    currentField[row, column] = generatedField[row, column];
+                    CurrentField[row, column] = generatedField[row, column];
                 }
             }
         }
