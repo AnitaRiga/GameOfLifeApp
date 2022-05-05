@@ -1,5 +1,5 @@
 ﻿using GameOfLifeApp;
 
-var data = new Iteration();
+var data = new GameManager();
 data.GetIteration();
 

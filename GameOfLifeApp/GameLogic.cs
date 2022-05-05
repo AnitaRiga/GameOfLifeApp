@@ -11,24 +11,35 @@ namespace GameOfLifeApp
         /// <summary>
         /// Declares a 2D array without specifying its size.   
         /// </summary>
-        bool[,] generatedField;
+        readonly bool[,] generatedField;
 
         /// <summary>
         /// Holds user data of array size.    
-        /// </summary>
+        /// </summary>        
         public int CountOfRows { get; set; }
+
+        /// <summary>
+        /// Holds user data of array size. 
+        /// </summary>        
         public int CountOfColumns { get; set; }
+
+        /// <summary>
+        /// Currently active game field.
+        /// </summary>        
         public bool[,] CurrentField { get; set; }
 
         /// <summary>
-        /// User defines array size.
-        /// </summary>
-        public GameLogic()
+        /// Defines array size.
+        /// </summary>        
+        public GameLogic(int rows, int columns)
         {
-            CountOfRows = Communicator.GetBoundedResponse("Please input number of rows.", 2, 100);
-            CountOfColumns = Communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
-            CurrentField = new bool[CountOfRows, CountOfColumns];
-            generatedField = new bool[CountOfRows, CountOfColumns];
+            //CountOfRows = Communicator.GetBoundedResponse("Please input number of rows.", 2, 100);
+            //CountOfColumns = Communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
+            CurrentField = new bool[rows, columns];
+            generatedField = new bool[rows, columns];
+
+            CountOfRows = rows;
+            CountOfColumns = columns;
         }
 
         /// <summary>
@@ -36,14 +47,28 @@ namespace GameOfLifeApp
         /// </summary>
         public void SetUpField()
         {
-            Random random = new Random();
+            // Instantiate random number generator
+            Random rnd = new Random();
+
             for (int row = 0; row < CountOfRows; row++)
             {
                 for (int column = 0; column < CountOfColumns; column++)
                 {
-                    CurrentField[row, column] = random.Next(0, 2) == 0;
+                    CurrentField[row, column] = rnd.Next(0, 2) == 0;
                 }
             }
+        }
+
+        /// <summary>
+        /// populates the field with Glider the Shape. 
+        /// </summary>
+        public void CreateGliderShape()
+        {
+            CurrentField[0, 0]= true;
+            CurrentField[2, 0] = true;
+            CurrentField[1, 1] = true;
+            CurrentField[2, 1] = true;
+            CurrentField[1, 2] = true;
         }
 
         /// <summary>
@@ -99,7 +124,7 @@ namespace GameOfLifeApp
         /// <param name="neighboursCount">Number of alive cells around a given cell.</param>
         /// <param name="isCurrentAlive">Given cell is alive. Value of isCurrentAlive: true.</param>
         /// <returns>Return the next value for a given cell.</returns>
-        private bool GetCellOffsprings(int neighboursCount, bool isCurrentAlive)
+        private static bool GetCellOffsprings(int neighboursCount, bool isCurrentAlive)
         {
             if (!isCurrentAlive && neighboursCount == 3)
             {
@@ -113,10 +138,12 @@ namespace GameOfLifeApp
         }
 
         /// <summary>
-        /// This method generates a new field.       
+        /// This method generates a new field and transfers data to a generated field.       
         /// </summary>
         public void GetNextGeneration()
         {
+            bool[,] generatedField2 = new bool[CountOfRows, CountOfColumns];
+
             for (int row = 0; row < CountOfRows; row++)
             {
                 for (int column = 0; column < CountOfColumns; column++)
@@ -124,23 +151,10 @@ namespace GameOfLifeApp
                     int count = NeighboursCount(row, column);
                     bool value = GetCellOffsprings(count, CurrentField[row, column]);  
 
-                    generatedField[row, column] = value;                    
+                    generatedField2[row, column] = value;                    
                 }
             }
-        }
-
-        /// <summary>
-        ///  Transfer data to a generated field.       
-        /// </summary>
-        public void TransferNextGenerations()
-        {
-            for (int row = 0; row < CountOfRows; row++)
-            {
-                for (int column = 0; column < CountOfColumns; column++)
-                {
-                    CurrentField[row, column] = generatedField[row, column];
-                }
-            }
+            CurrentField = generatedField2;
         }
     }
 }

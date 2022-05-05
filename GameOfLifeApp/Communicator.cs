@@ -11,12 +11,9 @@ namespace GameOfLifeApp
     /// </summary>
     public class Communicator
     {
-
         const string notANumberMessage = "Inputed value is not a number. Please input a number. Press any key to continue.";
         const string outOfLimit = "Out of limit.";
-
-        //const string notMinMax = string.Format("Value should be more than {0} and less than {1}.", GetBoundedResponse(int minValue, int maxValue);
-
+        const string notMinMax = "Value should be more than {0} and less than {1}." + "\n" + "Press any key to continue.";
 
         /// <summary>
         /// Gets data from user.
@@ -74,9 +71,7 @@ namespace GameOfLifeApp
                 else
                 {
                     Console.WriteLine(outOfLimit);
-                    Console.WriteLine($"Value should be more than {minValue} and less than {maxValue}.");
-                    //Console.WriteLine(notMinMax);
-                    Console.WriteLine("Press any key to continue.");
+                    Console.WriteLine(string.Format(notMinMax, minValue, maxValue));
                     Console.ReadKey();
                 }
             }
