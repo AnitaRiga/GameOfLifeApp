@@ -12,27 +12,10 @@ namespace GameOfLifeApp
     public class Display
     {
         /// <summary>
-        /// Prints appropriate element in the random array.
+        /// Prints appropriate element in the random array. Displays iterated arrays. 
         /// </summary>
-        /// <param name="gameData">logic of value generating</param>
-        public static void ShowRandomField(GameLogic gameLogic)
-        {
-            for (int row = 0; row < gameLogic.CountOfRows; row++)
-            {
-                for (int column = 0; column < gameLogic.CountOfColumns; column++)
-                {
-                    Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.Write(gameLogic.GeneratedField[row,column] ? " $ " : " * ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        /// <summary>
-        /// Displays iterated arrays. 
-        /// </summary>
-        public static void ShowIteration(GameLogic gameLogic)
+        /// <param name="gameData">logic of value generating</param>        
+        public void ShowIteration(GameLogic gameLogic)
         {
             for (int row = 0; row < gameLogic.CountOfRows; row++)
             {

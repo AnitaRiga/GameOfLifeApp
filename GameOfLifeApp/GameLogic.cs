@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 namespace GameOfLifeApp
 {
     public class GameLogic
-    {
-        /// <summary>
-        /// Declares a 2D array without specifying its size.   
-        /// </summary>
-        public bool[,] GeneratedField;
-
+    {        
         /// <summary>
         /// Holds user data of array size.    
         /// </summary>        
@@ -34,8 +29,6 @@ namespace GameOfLifeApp
         public GameLogic(int rows, int columns)
         {
             CurrentField = new bool[rows, columns];
-            GeneratedField = new bool[rows, columns];
-
             CountOfRows = rows;
             CountOfColumns = columns;
         }
@@ -45,8 +38,9 @@ namespace GameOfLifeApp
         /// </summary>
         public void SetUpField()
         {
-            // Instantiate random number generator
             Random rnd = new Random();
+
+            bool[,] GeneratedField = new bool [CountOfRows, CountOfColumns];
 
             for (int row = 0; row < CountOfRows; row++)
             {

@@ -13,8 +13,8 @@ namespace GameOfLifeApp
     public class GameManager
     {
         public GameLogic? data;
-
         public Communicator? communicator;
+        public Display? display;
        
         /// <summary>
         /// Iteration goes on until pressing stop key.
@@ -27,16 +27,19 @@ namespace GameOfLifeApp
             int countOfColumns = communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
 
             data = new GameLogic(countOfRows, countOfColumns);
-                       
             data.SetUpField();
-           
+
+            display = new Display();                       
+            display.ShowIteration(data);
+
+            Console.ReadLine();
+
             while (true)
             {               
                 Console.Clear();
-                Console.SetCursorPosition(0, 0);
-                Display.ShowRandomField(data);
+                Console.SetCursorPosition(0, 0);                
                 data.GetNextGeneration();
-                Display.ShowIteration(data);
+                display.ShowIteration(data);
                 Thread.Sleep(1000);
                                 
                 if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)

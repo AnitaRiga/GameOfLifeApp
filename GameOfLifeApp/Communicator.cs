@@ -59,10 +59,11 @@ namespace GameOfLifeApp
         /// <param name="maxValue">max number possible</param>
         /// <returns>number</returns>
         public int GetBoundedResponse(string message, int minValue, int maxValue)
-        {
-            int value = GetNumericResponse(message);
+        {            
             do
-            {           
+            {
+                int value = GetNumericResponse(message);
+
                 if (value >= minValue && value <= maxValue)
                 {
                     return value;
