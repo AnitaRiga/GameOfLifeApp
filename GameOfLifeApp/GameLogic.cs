@@ -33,8 +33,6 @@ namespace GameOfLifeApp
         /// </summary>        
         public GameLogic(int rows, int columns)
         {
-            //CountOfRows = Communicator.GetBoundedResponse("Please input number of rows.", 2, 100);
-            //CountOfColumns = Communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
             CurrentField = new bool[rows, columns];
             GeneratedField = new bool[rows, columns];
 
@@ -125,7 +123,7 @@ namespace GameOfLifeApp
         /// <param name="neighboursCount">Number of alive cells around a given cell.</param>
         /// <param name="isCurrentAlive">Given cell is alive. Value of isCurrentAlive: true.</param>
         /// <returns>Return the next value for a given cell.</returns>
-        private static bool GetCellOffsprings(int neighboursCount, bool isCurrentAlive)
+        private bool GetCellOffsprings(int neighboursCount, bool isCurrentAlive)
         {
             if (!isCurrentAlive && neighboursCount == 3)
             {

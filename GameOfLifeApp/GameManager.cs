@@ -38,7 +38,6 @@ namespace GameOfLifeApp
                 data.GetNextGeneration();
                 Display.ShowIteration(data);
                 Thread.Sleep(1000);
-                //Console.ReadLine();
                                 
                 if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
                     break;
