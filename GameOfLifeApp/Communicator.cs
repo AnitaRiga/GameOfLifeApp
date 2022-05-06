@@ -47,8 +47,7 @@ namespace GameOfLifeApp
                     Console.WriteLine(notANumberMessage);
                     Console.ReadKey();
                 }
-            }
-            while (true);
+            } while (true);
         }
 
         /// <summary>
@@ -74,8 +73,7 @@ namespace GameOfLifeApp
                     Console.WriteLine(string.Format(notMinMax, minValue, maxValue));
                     Console.ReadKey();
                 }
-            }
-            while (true);
+            } while (true);
         }
     }
 }
