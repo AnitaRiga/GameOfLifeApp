@@ -11,7 +11,7 @@ namespace GameOfLifeApp
         /// <summary>
         /// Declares a 2D array without specifying its size.   
         /// </summary>
-        readonly bool[,] generatedField;
+        public bool[,] GeneratedField;
 
         /// <summary>
         /// Holds user data of array size.    
@@ -36,7 +36,7 @@ namespace GameOfLifeApp
             //CountOfRows = Communicator.GetBoundedResponse("Please input number of rows.", 2, 100);
             //CountOfColumns = Communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
             CurrentField = new bool[rows, columns];
-            generatedField = new bool[rows, columns];
+            GeneratedField = new bool[rows, columns];
 
             CountOfRows = rows;
             CountOfColumns = columns;
@@ -54,9 +54,10 @@ namespace GameOfLifeApp
             {
                 for (int column = 0; column < CountOfColumns; column++)
                 {
-                    CurrentField[row, column] = rnd.Next(0, 2) == 0;
+                    GeneratedField[row, column] = rnd.Next(0, 2) == 0;
                 }
             }
+            CurrentField = GeneratedField;
         }
 
         /// <summary>

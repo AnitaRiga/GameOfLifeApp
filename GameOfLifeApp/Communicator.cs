@@ -10,7 +10,7 @@ namespace GameOfLifeApp
     /// Requests info from  user. Sends a message about incorrect input.
     /// </summary>
     public class Communicator
-    {
+    {      
         const string notANumberMessage = "Inputed value is not a number. Please input a number. Press any key to continue.";
         const string outOfLimit = "Out of limit.";
         const string notMinMax = "Value should be more than {0} and less than {1}." + "\n" + "Press any key to continue.";
@@ -32,8 +32,8 @@ namespace GameOfLifeApp
         /// </summary>
         /// <param name="message">User`s response</param>
         /// <returns>int</returns>
-        public static int GetNumericResponse(string message)
-        {
+        public int GetNumericResponse(string message)
+        {  
             do
             {
                 string? response = GetInput(message);
@@ -58,12 +58,11 @@ namespace GameOfLifeApp
         /// <param name="minValue">min number possible</param>
         /// <param name="maxValue">max number possible</param>
         /// <returns>number</returns>
-        public static int GetBoundedResponse(string message, int minValue, int maxValue)
+        public int GetBoundedResponse(string message, int minValue, int maxValue)
         {
+            int value = GetNumericResponse(message);
             do
-            {
-                int value = GetNumericResponse(message);
-
+            {           
                 if (value >= minValue && value <= maxValue)
                 {
                     return value;
