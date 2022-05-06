@@ -34,7 +34,7 @@ namespace GameOfLifeApp
             {               
                 Console.Clear();
                 Console.SetCursorPosition(0, 0);
-                Display.ShowData(data);
+                Display.ShowRandomField(data);
                 data.GetNextGeneration();
                 Display.ShowIteration(data);
                 Thread.Sleep(1000);

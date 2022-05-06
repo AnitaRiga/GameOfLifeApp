@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace GameOfLifeApp
 {
     /// <summary>
-    /// Displays 2 boolean values array. 
+    /// Displays 2 boolean values arrays. 
     /// </summary>
     public class Display
     {
         /// <summary>
-        /// Prints appropriate element in the array.
+        /// Prints appropriate element in the random array.
         /// </summary>
         /// <param name="gameData">logic of value generating</param>
-        public static void ShowData(GameLogic gameLogic)
+        public static void ShowRandomField(GameLogic gameLogic)
         {
             for (int row = 0; row < gameLogic.CountOfRows; row++)
             {
@@ -29,6 +29,9 @@ namespace GameOfLifeApp
             }
         }
 
+        /// <summary>
+        /// Displays iterated arrays. 
+        /// </summary>
         public static void ShowIteration(GameLogic gameLogic)
         {
             for (int row = 0; row < gameLogic.CountOfRows; row++)
