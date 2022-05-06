@@ -31,9 +31,7 @@ namespace GameOfLifeApp
 
             display = new Display();                       
             display.ShowIteration(data);
-
-            Console.ReadLine();
-
+                        
             while (true)
             {               
                 Console.Clear();
@@ -43,7 +41,9 @@ namespace GameOfLifeApp
                 Thread.Sleep(1000);
                                 
                 if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
+                {
                     break;
+                }
             }
         }
     }

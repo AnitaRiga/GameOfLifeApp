@@ -20,7 +20,7 @@ namespace GameOfLifeApp
         /// </summary>
         /// <param name="message">Requests to provide informatiom about array size.</param>
         /// <returns>Returns count of columns and count of rows.</returns>
-        private static string? GetInput(string message)
+        private static string GetInput(string message)
         {
             Console.Clear();
             Console.WriteLine(message);
@@ -30,8 +30,8 @@ namespace GameOfLifeApp
         /// <summary>
         /// Checks the input and converts it to int. Requests to input a number.
         /// </summary>
-        /// <param name="message">User`s response</param>
-        /// <returns>int</returns>
+        /// <param name="message">User`s response.</param>
+        /// <returns>Returns a number that equals to the count of rows / columns.</returns>
         public int GetNumericResponse(string message)
         {  
             do
@@ -54,10 +54,10 @@ namespace GameOfLifeApp
         /// <summary>
         /// Checks whether int is aligned with number range.
         /// </summary>
-        /// <param name="message">user`s response</param>
-        /// <param name="minValue">min number possible</param>
-        /// <param name="maxValue">max number possible</param>
-        /// <returns>number</returns>
+        /// <param name="message">User`s response.</param>
+        /// <param name="minValue">Min number possible.</param>
+        /// <param name="maxValue">Max number possible.</param>
+        /// <returns>Returns a value that equals to the count of rows / columns.</returns>
         public int GetBoundedResponse(string message, int minValue, int maxValue)
         {            
             do

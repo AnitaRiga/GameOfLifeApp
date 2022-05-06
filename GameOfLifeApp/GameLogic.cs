@@ -53,7 +53,7 @@ namespace GameOfLifeApp
         }
 
         /// <summary>
-        /// populates the field with Glider the Shape. 
+        /// Populates the field with Glider the Shape. 
         /// </summary>
         public void CreateGliderShape()
         {
@@ -69,7 +69,7 @@ namespace GameOfLifeApp
         /// </summary>
         /// <param name="currentRow">Row of a current cell.</param>
         /// <param name="currentColumn">Column of a current cell.</param>
-        /// <returns>Return number of alive neighbours.</returns>
+        /// <returns>Returns number of alive neighbours.</returns>
         private int NeighboursCount(int currentRow, int currentColumn)
         {
             int count = 0;
@@ -116,7 +116,7 @@ namespace GameOfLifeApp
         /// </summary>
         /// <param name="neighboursCount">Number of alive cells around a given cell.</param>
         /// <param name="isCurrentAlive">Given cell is alive. Value of isCurrentAlive: true.</param>
-        /// <returns>Return the next value for a given cell.</returns>
+        /// <returns>Returns the next value for a given cell.</returns>
         private bool GetCellOffsprings(int neighboursCount, bool isCurrentAlive)
         {
             if (!isCurrentAlive && neighboursCount == 3)
@@ -135,7 +135,7 @@ namespace GameOfLifeApp
         /// </summary>
         public void GetNextGeneration()
         {
-            bool[,] generatedField2 = new bool[CountOfRows, CountOfColumns];
+            bool[,] generatedField = new bool[CountOfRows, CountOfColumns];
 
             for (int row = 0; row < CountOfRows; row++)
             {
@@ -144,10 +144,10 @@ namespace GameOfLifeApp
                     int count = NeighboursCount(row, column);
                     bool value = GetCellOffsprings(count, CurrentField[row, column]);  
 
-                    generatedField2[row, column] = value;                    
+                    generatedField[row, column] = value;                    
                 }
             }
-            CurrentField = generatedField2;
+            CurrentField = generatedField;
         }
     }
 }
