@@ -18,9 +18,9 @@ namespace GameOfLifeApp
         public Serializer? serializer;
 
         /// <summary>
-        /// Iteration goes on until pressing stop key.
+        /// Runs the game.
         /// </summary>
-        public void GetIteration()
+        public void RunGame()
         {
             Console.Title = "Game Of Life.";
 

@@ -75,5 +75,17 @@ namespace GameOfLifeApp
                 }
             } while (true);
         }
+
+        /// <summary>
+        /// Informs about the response options and requests a response from a user.
+        /// </summary>
+        public void StartPage()
+        {
+            Console.WriteLine();
+            const string option = "Please select 1 for running a game and 2 for saving the data." + "\n" + 
+                "If you want to stop the game, please press the Enter key." + "\n" + 
+                "If you want to leave the game, please press the Enter key twice.";
+            Console.WriteLine(option);
+        }
     }
 }
