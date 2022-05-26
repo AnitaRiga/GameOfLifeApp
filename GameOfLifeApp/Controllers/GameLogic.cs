@@ -1,67 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GameOfLifeApp
+namespace GameOfLifeApp 
 {
-    public class GameLogic
+    public class GameLogic : IGameLogic
     {
-        /// <summary>
-        /// Holds user data of array size.    
-        /// </summary>        
-        public int CountOfRows { get; set; }
+        //private IGameField pr;
 
-        /// <summary>
-        /// Holds user data of array size. 
-        /// </summary>        
-        public int CountOfColumns { get; set; }
-
-        /// <summary>
-        /// Currently active game field.
-        /// </summary>        
-        public bool[,] CurrentField { get; set; }
-
-        /// <summary>
-        /// Defines array size.
-        /// </summary>        
-        public GameLogic(int rows, int columns)
+        public GameLogic()
         {
-            CurrentField = new bool[rows, columns];
-            CountOfRows = rows;
-            CountOfColumns = columns;
+            //pr = properties;
         }
 
         /// <summary>
         /// Generates a start array of random values according to user`s input.
         /// </summary>
-        public void SetUpField()
-        {
+        public void SetUpField(IGameField pr)
+        {                
             Random rnd = new Random();
 
-            bool[,] GeneratedField = new bool[CountOfRows, CountOfColumns];
+            bool[,] GeneratedField = new bool[pr.CountOfRows, pr.CountOfColumns];
 
-            for (int row = 0; row < CountOfRows; row++)
+            for (int row = 0; row < pr.CountOfRows; row++)
             {
-                for (int column = 0; column < CountOfColumns; column++)
+                for (int column = 0; column < pr.CountOfColumns; column++)
                 {
                     GeneratedField[row, column] = rnd.Next(0, 2) == 0;
                 }
             }
-            CurrentField = GeneratedField;
+            pr.CurrentField = GeneratedField;
         }
 
         /// <summary>
         /// Populates the field with Glider the Shape. 
         /// </summary>
-        public void CreateGliderShape()
+        public void CreateGliderShape(IGameField pr)
         {
-            CurrentField[0, 0] = true;
-            CurrentField[2, 0] = true;
-            CurrentField[1, 1] = true;
-            CurrentField[2, 1] = true;
-            CurrentField[1, 2] = true;
+            pr.CurrentField[0, 0] = true;
+            pr.CurrentField[2, 0] = true;
+            pr.CurrentField[1, 1] = true;
+            pr.CurrentField[2, 1] = true;
+            pr.CurrentField[1, 2] = true;
         }
 
         /// <summary>
@@ -70,20 +48,21 @@ namespace GameOfLifeApp
         /// <param name="currentRow">Row of a current cell.</param>
         /// <param name="currentColumn">Column of a current cell.</param>
         /// <returns>Returns number of alive neighbours.</returns>
-        private int NeighboursCount(int currentRow, int currentColumn)
+        private int NeighboursCount(IGameField pr, int currentRow, int currentColumn)
         {
             int count = 0;
+            int actualRow;
+            int actualColumn;
+
             for (int row = currentRow - 1; row <= currentRow + 1; row++)
             {
                 for (int column = currentColumn - 1; column <= currentColumn + 1; column++)
                 {
-                    int actualRow;
-                    int actualColumn;
                     if (row < 0)
                     {
-                        actualRow = CurrentField.GetLength(0) - 1;
+                        actualRow = pr.CurrentField.GetLength(0) - 1;
                     }
-                    else if (row == CurrentField.GetLength(0))
+                    else if (row == pr.CurrentField.GetLength(0))
                     {
                         actualRow = 0;
                     }
@@ -93,9 +72,9 @@ namespace GameOfLifeApp
                     }
                     if (column < 0)
                     {
-                        actualColumn = CurrentField.GetLength(1) - 1;
+                        actualColumn = pr.CurrentField.GetLength(1) - 1;
                     }
-                    else if (column == CurrentField.GetLength(1))
+                    else if (column == pr.CurrentField.GetLength(1))
                     {
                         actualColumn = 0;
                     }
@@ -103,10 +82,10 @@ namespace GameOfLifeApp
                     {
                         actualColumn = column;
                     }
-                    count += CurrentField[actualRow, actualColumn] ? 1 : 0;
+                    count += pr.CurrentField[actualRow, actualColumn] ? 1 : 0;
                 }
             }
-            count -= CurrentField[currentRow, currentColumn] ? 1 : 0;
+            count -= pr.CurrentField[currentRow, currentColumn] ? 1 : 0;
 
             return count;
         }
@@ -133,21 +112,21 @@ namespace GameOfLifeApp
         /// <summary>
         /// This method generates a new field and transfers data to a generated field.       
         /// </summary>
-        public void GetNextGeneration()
+        public void GetNextGeneration(IGameField pr)
         {
-            bool[,] generatedField = new bool[CountOfRows, CountOfColumns];
+            bool[,] generatedField = new bool[pr.CountOfRows, pr.CountOfColumns];
 
-            for (int row = 0; row < CountOfRows; row++)
+            for (int row = 0; row < pr.CountOfRows; row++)
             {
-                for (int column = 0; column < CountOfColumns; column++)
+                for (int column = 0; column < pr.CountOfColumns; column++)
                 {
-                    int count = NeighboursCount(row, column);
-                    bool value = GetCellOffsprings(count, CurrentField[row, column]);
+                    int countAliveNeighbours = NeighboursCount(pr, row, column);
 
-                    generatedField[row, column] = value;
+                    generatedField[row, column] = GetCellOffsprings(countAliveNeighbours, pr.CurrentField[row, column]);
                 }
             }
-            CurrentField = generatedField;
+
+            pr.CurrentField = generatedField;
         }
     }
 }
