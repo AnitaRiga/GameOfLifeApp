@@ -34,9 +34,10 @@ namespace GameOfLifeApp
             int countOfColumns = chat.GetBoundedResponse("Please input number of columns.", 2, 100);
             int iterationCounter = 0;
 
+            
             field.CountOfRows = countOfRows;
             field.CountOfColumns = countOfColumns;
-            logic.SetUpField(field);            
+            logic.SetUpField(field);
 
             while (true)
             {                
@@ -45,9 +46,12 @@ namespace GameOfLifeApp
                 logic.GetNextGeneration(field);
                 print.ShowIteration(field);
                 print.CountAliveCells(field);
-                //Console.WriteLine($"The count of alive cells is {aliveCelssCount}.");
+
+                object aliveCellsCount = print.CountAliveCells(field);
+                Console.WriteLine($"The count of alive cells is {aliveCellsCount}.");
                 iterationCounter++;
                 Console.WriteLine($"The count of iterations is {iterationCounter}.");
+
                 Thread.Sleep(1000);
                 converter.SaveData(field);
 

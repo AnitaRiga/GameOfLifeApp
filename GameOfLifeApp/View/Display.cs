@@ -45,9 +45,8 @@
                     }
                 }
             }
+
             return aliveCellsCount;
-            
-            //Console.WriteLine($"The count of alive cells is {aliveCellsCount}.");
         }
     }
 }
