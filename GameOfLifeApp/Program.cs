@@ -2,12 +2,11 @@
 
 Console.Title = $"Game Of Life.";
 
-var field = new GameField(); 
+var gameManager = new GameManager(new Communicator(), new Display(), new GameLogic(), new Serializer());
 
-IApplicationManager trigger = new ApplicationManager(
-    new Communicator(),    
-    new GameLogic(),
+IApplicationManager running = new ApplicationManager(
+    new Communicator(),
     new Serializer(),
-    new GameManager(new Communicator(), new Display(field), new GameLogic(), new Serializer()));
+    gameManager);
 
-trigger.RunApplication();
+running.RunApplication();

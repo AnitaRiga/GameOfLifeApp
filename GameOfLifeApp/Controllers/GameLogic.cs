@@ -4,30 +4,23 @@ namespace GameOfLifeApp
 {
     public class GameLogic : IGameLogic
     {
-        //private IGameField pr;
-
-        public GameLogic()
-        {
-            //pr = properties;
-        }
-
         /// <summary>
         /// Generates a start array of random values according to user`s input.
         /// </summary>
-        public void SetUpField(IGameField pr)
+        public void SetUpField(IGameField field)
         {                
             Random rnd = new Random();
 
-            bool[,] GeneratedField = new bool[pr.CountOfRows, pr.CountOfColumns];
+            bool[,] GeneratedField = new bool[field.CountOfRows, field.CountOfColumns];
 
-            for (int row = 0; row < pr.CountOfRows; row++)
+            for (int row = 0; row < field.CountOfRows; row++)
             {
-                for (int column = 0; column < pr.CountOfColumns; column++)
+                for (int column = 0; column < field.CountOfColumns; column++)
                 {
                     GeneratedField[row, column] = rnd.Next(0, 2) == 0;
                 }
             }
-            pr.CurrentField = GeneratedField;
+            field.CurrentField = GeneratedField;
         }
 
         /// <summary>
@@ -48,7 +41,7 @@ namespace GameOfLifeApp
         /// <param name="currentRow">Row of a current cell.</param>
         /// <param name="currentColumn">Column of a current cell.</param>
         /// <returns>Returns number of alive neighbours.</returns>
-        private int NeighboursCount(IGameField pr, int currentRow, int currentColumn)
+        private int NeighboursCount(IGameField field, int currentRow, int currentColumn)
         {
             int count = 0;
             int actualRow;
@@ -60,9 +53,9 @@ namespace GameOfLifeApp
                 {
                     if (row < 0)
                     {
-                        actualRow = pr.CurrentField.GetLength(0) - 1;
+                        actualRow = field.CurrentField.GetLength(0) - 1;
                     }
-                    else if (row == pr.CurrentField.GetLength(0))
+                    else if (row == field.CurrentField.GetLength(0))
                     {
                         actualRow = 0;
                     }
@@ -72,9 +65,9 @@ namespace GameOfLifeApp
                     }
                     if (column < 0)
                     {
-                        actualColumn = pr.CurrentField.GetLength(1) - 1;
+                        actualColumn = field.CurrentField.GetLength(1) - 1;
                     }
-                    else if (column == pr.CurrentField.GetLength(1))
+                    else if (column == field.CurrentField.GetLength(1))
                     {
                         actualColumn = 0;
                     }
@@ -82,10 +75,10 @@ namespace GameOfLifeApp
                     {
                         actualColumn = column;
                     }
-                    count += pr.CurrentField[actualRow, actualColumn] ? 1 : 0;
+                    count += field.CurrentField[actualRow, actualColumn] ? 1 : 0;
                 }
             }
-            count -= pr.CurrentField[currentRow, currentColumn] ? 1 : 0;
+            count -= field.CurrentField[currentRow, currentColumn] ? 1 : 0;
 
             return count;
         }
@@ -112,21 +105,21 @@ namespace GameOfLifeApp
         /// <summary>
         /// This method generates a new field and transfers data to a generated field.       
         /// </summary>
-        public void GetNextGeneration(IGameField pr)
+        public void GetNextGeneration(IGameField field)
         {
-            bool[,] generatedField = new bool[pr.CountOfRows, pr.CountOfColumns];
+            bool[,] generatedField = new bool[field.CountOfRows, field.CountOfColumns];
 
-            for (int row = 0; row < pr.CountOfRows; row++)
+            for (int row = 0; row < field.CountOfRows; row++)
             {
-                for (int column = 0; column < pr.CountOfColumns; column++)
+                for (int column = 0; column < field.CountOfColumns; column++)
                 {
-                    int countAliveNeighbours = NeighboursCount(pr, row, column);
+                    int countAliveNeighbours = NeighboursCount(field, row, column);
 
-                    generatedField[row, column] = GetCellOffsprings(countAliveNeighbours, pr.CurrentField[row, column]);
+                    generatedField[row, column] = GetCellOffsprings(countAliveNeighbours, field.CurrentField[row, column]);
                 }
             }
 
-            pr.CurrentField = generatedField;
+            field.CurrentField = generatedField;
         }
     }
 }

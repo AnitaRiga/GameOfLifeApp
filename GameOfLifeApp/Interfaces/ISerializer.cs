@@ -4,6 +4,7 @@ namespace GameOfLifeApp
 {
     public interface ISerializer
     {
-        void SaveData(IGameField pr);
+        void SaveData(IGameField field);
+        void Load();
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IGameManager
     {
-        void RunGame(IGameField pr);
+        void RunGame(IGameField field);
     }
 }

@@ -4,34 +4,32 @@ namespace GameOfLifeApp
 {
     public class ApplicationManager : IApplicationManager
     {
-        private ICommunicator input;
-        private IGameLogic data;
-        private ISerializer dataBase;
+        private ICommunicator chat;
+        private ISerializer converter;
         private IGameManager manager;
-        private IGameField pr;
+        private IGameField field;
   
-        public ApplicationManager(Communicator communicator, GameLogic gameLogic, Serializer serializer, GameManager gameManager)
+        public ApplicationManager(Communicator communicator, Serializer serializer, GameManager gameManager)
         {
-            input = communicator;
-            data = gameLogic;
-            dataBase = serializer;
+            chat = communicator;
+            converter = serializer;
             manager = gameManager;
         }               
 
         public void RunApplication()
         {
-            pr = new GameField();
+            field = new GameField();
             bool isApplicationRunning = true;
             while (isApplicationRunning)
             {
-                input.StartPage();
+                chat.StartPage();
                 switch (Console.ReadLine())
                 {                    
                     case "1":
-                        manager.RunGame(pr); 
+                        manager.RunGame(field); 
                         break;
                     case "2":
-                        dataBase.SaveData(pr);
+                        converter.SaveData(field);
                         break;
                     default:
                         isApplicationRunning = false;
@@ -40,11 +38,6 @@ namespace GameOfLifeApp
             }
 
             Console.WriteLine();
-        }
-
-        public void RunApplication(int countOfRows, int countOfColumns)
-        {
-          data = new GameLogic();
         }
     }
 }

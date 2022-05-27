@@ -4,7 +4,7 @@ namespace GameOfLifeApp
 {
     public interface IDisplay
     {        
-        void ShowIteration(IGameField pr);
-        void CountAliveCells(IGameField pr);
+        void ShowIteration(IGameField field);
+        int CountAliveCells(IGameField field);
     }
 }

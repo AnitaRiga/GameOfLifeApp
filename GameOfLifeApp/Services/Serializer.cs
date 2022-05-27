@@ -7,12 +7,6 @@ namespace GameOfLifeApp
     /// </summary>
     public class Serializer : ISerializer
     {
-        public Serializer()
-        {
-            //data = gameLogic;
-            //pr = properties;
-        }
-
         // Declaring a private string. Get the complete path of the current working directory. Using CurrentDirectory property of Environment class.
         private string _fileName = $"{Environment.CurrentDirectory}\\GameData.json";
 
@@ -20,11 +14,11 @@ namespace GameOfLifeApp
         /// Creates a StreamWriter and adds some text to the writer using StreamWriter.
         /// </summary>
         /// <param name="gameLogic">Saves the data of the object.</param>
-        public void SaveData(IGameField pr)
+        public void SaveData(IGameField field)
         {
             using (StreamWriter writer = File.CreateText(_fileName))
             {
-                string output = JsonConvert.SerializeObject(pr);
+                string output = JsonConvert.SerializeObject(field);
                 writer.Write(output);
             }
         }
@@ -36,7 +30,7 @@ namespace GameOfLifeApp
             {
                 //Reads all characters from the current position to the end of the stream and returns them as a single string.
                 string fileText = sr.ReadToEnd();
-                GameField? pr = JsonConvert.DeserializeObject<GameField>(fileText);
+                GameField pr = JsonConvert.DeserializeObject<GameField>(fileText);
                 while ((fileText = sr.ReadLine()) != null)
                 {
                     Console.WriteLine(fileText);

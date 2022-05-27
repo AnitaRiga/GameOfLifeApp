@@ -4,8 +4,8 @@ namespace GameOfLifeApp
 {
     public interface IGameLogic
     {
-        void SetUpField(IGameField pr);        
-        void GetNextGeneration(IGameField pr);       
+        void SetUpField(IGameField field);        
+        void GetNextGeneration(IGameField field);       
     }
 }
  
