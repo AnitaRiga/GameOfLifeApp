@@ -7,5 +7,6 @@ namespace GameOfLifeApp
         int CountOfRows { get; set; }
         int CountOfColumns { get; set; }
         bool[,] CurrentField { get; set; }
+        int CountIteration { get; set; }
     }
 }

@@ -28,17 +28,19 @@ namespace GameOfLifeApp
         /// <summary>
         /// Runs the game.
         /// </summary>
-        public void RunGame(IGameField field)
-        {
-            int countOfRows = chat.GetBoundedResponse("Please input number of rows.", 2, 100);
-            int countOfColumns = chat.GetBoundedResponse("Please input number of columns.", 2, 100);
-            int iterationCounter = 0;
+        public void RunGame(IGameField field, bool isNewGame)
+        {          
+            if (isNewGame)
+            {
+                int countOfRows = chat.GetBoundedResponse("Please input number of rows.", 2, 100);
+                int countOfColumns = chat.GetBoundedResponse("Please input number of columns.", 2, 100);
 
-            
-            field.CountOfRows = countOfRows;
-            field.CountOfColumns = countOfColumns;
-            logic.SetUpField(field);
-
+                field.CountOfRows = countOfRows;
+                field.CountOfColumns = countOfColumns;
+                field.CountIteration = 0;
+                logic.SetUpField(field);
+            }
+                        
             while (true)
             {                
                 Console.Clear();
@@ -49,8 +51,8 @@ namespace GameOfLifeApp
 
                 object aliveCellsCount = print.CountAliveCells(field);
                 Console.WriteLine($"The count of alive cells is {aliveCellsCount}.");
-                iterationCounter++;
-                Console.WriteLine($"The count of iterations is {iterationCounter}.");
+                field.CountIteration++;
+                Console.WriteLine($"The count of iterations is {field.CountIteration}.");
 
                 Thread.Sleep(1000);
                 converter.SaveData(field);
@@ -58,7 +60,7 @@ namespace GameOfLifeApp
                 if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {
                     break;
-                }     
+                }
             }
         }
     }

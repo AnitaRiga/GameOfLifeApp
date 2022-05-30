@@ -18,5 +18,7 @@ namespace GameOfLifeApp
         /// Currently active game field.
         /// </summary>        
         public bool[,] CurrentField { get; set; }
+
+        public int CountIteration { get; set; }
     }
 }

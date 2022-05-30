@@ -2,6 +2,9 @@
 
 namespace GameOfLifeApp
 {
+    /// <summary>
+    /// Manages a game.
+    /// </summary>
     public class ApplicationManager : IApplicationManager
     {
         private ICommunicator chat;
@@ -16,6 +19,9 @@ namespace GameOfLifeApp
             manager = gameManager;
         }               
 
+        /// <summary>
+        /// Manages the running app.
+        /// </summary>
         public void RunApplication()
         {
             field = new GameField();
@@ -26,10 +32,11 @@ namespace GameOfLifeApp
                 switch (Console.ReadLine())
                 {                    
                     case "1":
-                        manager.RunGame(field); 
+                        manager.RunGame(field, true); 
                         break;
                     case "2":
-                        converter.SaveData(field);
+                        converter.SaveData(field); 
+                        manager.RunGame(field, false);
                         break;
                     default:
                         isApplicationRunning = false;
