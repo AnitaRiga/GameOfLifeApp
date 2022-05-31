@@ -13,7 +13,7 @@ namespace GameOfLifeApp
         /// <summary>
         /// Creates a StreamWriter and adds some text to the writer using StreamWriter.
         /// </summary>
-        /// <param name="gameLogic">Saves the data of the object.</param>
+        /// <param name="field">Saves the data of the object.</param>
         public void SaveData(IGameField field)
         {
             using (StreamWriter writer = File.CreateText(_fileName))
@@ -23,12 +23,14 @@ namespace GameOfLifeApp
             }
         }
 
+        /// <summary>
+        /// Opens the file for reading and 
+        /// reads all characters from the current position to the end of the stream and returns them as a single string.
+        /// </summary>
         public void Load()
         {
-            // Open the file for reading.
             using (StreamReader sr = File.OpenText(_fileName))
             {
-                //Reads all characters from the current position to the end of the stream and returns them as a single string.
                 string fileText = sr.ReadToEnd();
                 GameField pr = JsonConvert.DeserializeObject<GameField>(fileText);
                 while ((fileText = sr.ReadLine()) != null)

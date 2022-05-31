@@ -7,22 +7,17 @@ namespace GameOfLifeApp
     /// </summary>
     public class ApplicationManager : IApplicationManager
     {
-        private ICommunicator chat;
-        private ISerializer converter;
         private IGameManager manager;
-        private IGameField field;
-  
-        public ApplicationManager(Communicator communicator, Serializer serializer, GameManager gameManager)
+
+        public ApplicationManager(IGameManager gameManager)
         {
-            chat = communicator;
-            converter = serializer;
             manager = gameManager;
-        }               
+        }
 
         /// <summary>
         /// Manages the running app.
         /// </summary>
-        public void RunApplication()
+        public void RunApplication(IGameField field, ICommunicator chat, ISerializer converter)
         {
             field = new GameField();
             bool isApplicationRunning = true;
@@ -35,7 +30,7 @@ namespace GameOfLifeApp
                         manager.RunGame(field, true); 
                         break;
                     case "2":
-                        converter.SaveData(field); 
+                        converter.SaveData(field);
                         manager.RunGame(field, false);
                         break;
                     default:

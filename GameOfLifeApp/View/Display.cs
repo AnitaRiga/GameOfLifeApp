@@ -8,7 +8,7 @@
         /// <summary>
         /// Prints appropriate element in the random array. Displays iterated arrays. 
         /// </summary>
-        /// <param name="gameData">Logic of value generating.</param>        
+        /// <param name="field">Logic of value generating.</param>        
         public void ShowIteration(IGameField field)
         {
             const string emoji = " \u263A";
@@ -26,27 +26,6 @@
 
             Console.ForegroundColor = initialColor;
             Console.WriteLine();
-        }
-
-        /// <summary>
-        /// Counts alive cells in each iteration.
-        /// </summary>
-        /// <param name="gameLogic"></param>
-        public int CountAliveCells(IGameField field)
-        {
-            int aliveCellsCount = 0;
-            for (int row = 0; row < field.CountOfRows; row++)
-            {
-                for (int column = 0; column < field.CountOfColumns; column++)
-                {
-                    if (field.CurrentField[row, column])
-                    {
-                        aliveCellsCount++;
-                    }
-                }
-            }
-
-            return aliveCellsCount;
         }
     }
 }

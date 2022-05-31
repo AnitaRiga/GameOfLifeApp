@@ -2,6 +2,9 @@
 
 namespace GameOfLifeApp 
 {
+    /// <summary>
+    /// Generates fields.
+    /// </summary>
     public class GameLogic : IGameLogic
     {
         /// <summary>
@@ -11,16 +14,16 @@ namespace GameOfLifeApp
         {                
             Random rnd = new Random();
 
-            bool[,] GeneratedField = new bool[field.CountOfRows, field.CountOfColumns];
+            bool[,] InitialField = new bool[field.CountOfRows, field.CountOfColumns];
 
             for (int row = 0; row < field.CountOfRows; row++)
             {
                 for (int column = 0; column < field.CountOfColumns; column++)
                 {
-                    GeneratedField[row, column] = rnd.Next(0, 2) == 0;
+                    InitialField[row, column] = rnd.Next(0, 2) == 0;
                 }
             }
-            field.CurrentField = GeneratedField;
+            field.CurrentField = InitialField;
         }
 
         /// <summary>
@@ -120,6 +123,28 @@ namespace GameOfLifeApp
             }
 
             field.CurrentField = generatedField;
+        }
+
+        /// <summary>
+        /// Counts alive cells in each iteration.
+        /// </summary>
+        /// <param name="field">Current field.</param>
+        /// <returns>Alive cells count.</returns>
+        public int CountAliveCells(IGameField field)
+        {
+            int aliveCellsCount = 0;
+            for (int row = 0; row < field.CountOfRows; row++)
+            {
+                for (int column = 0; column < field.CountOfColumns; column++)
+                {
+                    if (field.CurrentField[row, column])
+                    {
+                        aliveCellsCount++;
+                    }
+                }
+            }
+
+            return aliveCellsCount;
         }
     }
 }

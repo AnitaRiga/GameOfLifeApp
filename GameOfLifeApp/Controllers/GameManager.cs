@@ -7,7 +7,7 @@ namespace GameOfLifeApp
     /// </summary>
     public class GameManager : IGameManager
     {
-        //GameManager class class depends on the following classes.
+        //GameManager class depends on the following classes.
         private IGameLogic logic;
         private ICommunicator chat;
         private IDisplay print;
@@ -28,6 +28,8 @@ namespace GameOfLifeApp
         /// <summary>
         /// Runs the game.
         /// </summary>
+        /// <param name="field">Game field.</param>
+        /// <param name="isNewGame">Whether the game is new or the stopped game.</param>
         public void RunGame(IGameField field, bool isNewGame)
         {          
             if (isNewGame)
@@ -40,16 +42,16 @@ namespace GameOfLifeApp
                 field.CountIteration = 0;
                 logic.SetUpField(field);
             }
-                        
+         
             while (true)
             {                
                 Console.Clear();
                 Console.SetCursorPosition(0, 0);
                 logic.GetNextGeneration(field);
                 print.ShowIteration(field);
-                print.CountAliveCells(field);
+                logic.CountAliveCells(field);
 
-                object aliveCellsCount = print.CountAliveCells(field);
+                object aliveCellsCount = logic.CountAliveCells(field);
                 Console.WriteLine($"The count of alive cells is {aliveCellsCount}.");
                 field.CountIteration++;
                 Console.WriteLine($"The count of iterations is {field.CountIteration}.");
