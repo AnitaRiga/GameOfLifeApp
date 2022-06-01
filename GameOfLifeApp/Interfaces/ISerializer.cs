@@ -16,7 +16,7 @@ namespace GameOfLifeApp
         /// <summary>
         /// Opens the file for reading and 
         /// reads all characters from the current position to the end of the stream and returns them as a single string.
-        /// </summary>
-        void Load();
+        /// <returns>Field.</returns>
+        GameField Load();
     }
 }

@@ -52,7 +52,9 @@ namespace GameOfLifeApp
         public void StartPage()
         {
             Console.WriteLine();
-            const string option = "Please select 1 for running a game and 2 for saving the data." + "\n" + 
+            const string option = "Please select 1 for running a game" + "\n" + 
+                "2 for saving the data." + "\n" +
+                "3 for continuing the last saved game." + "\n" +
                 "If you want to stop the game, please press the Enter key." + "\n" + 
                 "If you want to leave the game, please press the Enter key twice.";
             Console.WriteLine(option);

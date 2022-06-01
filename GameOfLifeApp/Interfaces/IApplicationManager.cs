@@ -10,6 +10,6 @@ namespace GameOfLifeApp
         /// <summary>
         /// Manages the running app.
         /// </summary>
-        void RunApplication(IGameField field, ICommunicator chat, ISerializer converter);
+        void RunApplication(ICommunicator chat, ISerializer converter, IGameManager manager);
     }
 }

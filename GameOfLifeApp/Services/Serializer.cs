@@ -25,19 +25,20 @@ namespace GameOfLifeApp
 
         /// <summary>
         /// Opens the file for reading and 
-        /// reads all characters from the current position to the end of the stream and returns them as a single string.
-        /// </summary>
-        public void Load()
+        /// reads all characters from the current position to the end of the stream and returns them as a single string.        
+        /// /// </summary>
+        /// <returns>Field.</returns>
+        public GameField Load()
         {
+            GameField field = new GameField();
+            
             using (StreamReader sr = File.OpenText(_fileName))
-            {
-                string fileText = sr.ReadToEnd();
-                GameField pr = JsonConvert.DeserializeObject<GameField>(fileText);
-                while ((fileText = sr.ReadLine()) != null)
                 {
-                    Console.WriteLine(fileText);
+                    string fileText = sr.ReadToEnd();
+                    field = JsonConvert.DeserializeObject<GameField>(fileText);                    
                 }
-            }
+            
+            return field;
         }
     }
 }

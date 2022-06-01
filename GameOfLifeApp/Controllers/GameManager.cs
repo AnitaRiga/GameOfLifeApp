@@ -8,10 +8,10 @@ namespace GameOfLifeApp
     public class GameManager : IGameManager
     {
         //GameManager class depends on the following classes.
-        private IGameLogic logic;
-        private ICommunicator chat;
-        private IDisplay print;
-        private ISerializer converter;
+        private IGameLogic _gameLogic;
+        private ICommunicator _communicator;
+        private IDisplay _display;
+        private ISerializer _serializer;
 
         //Constructor accepts parameters of the dependency object type.
         //These parameters can accept any concrete class objects that implements interfaces.
@@ -19,10 +19,10 @@ namespace GameOfLifeApp
         //= injecting the dependency object through the constructor.
         public GameManager(ICommunicator communicator, IDisplay display, IGameLogic gameLogic, ISerializer serializer)
         {
-            chat = communicator;
-            print = display;
-            logic = gameLogic;
-            converter = serializer;
+            _communicator = communicator;
+            _display = display;
+            _gameLogic = gameLogic;
+            _serializer = serializer;
         }
 
         /// <summary>
@@ -34,30 +34,31 @@ namespace GameOfLifeApp
         {          
             if (isNewGame)
             {
-                int countOfRows = chat.GetBoundedResponse("Please input number of rows.", 2, 100);
-                int countOfColumns = chat.GetBoundedResponse("Please input number of columns.", 2, 100);
+                int countOfRows = _communicator.GetBoundedResponse("Please input number of rows.", 2, 100);
+                int countOfColumns = _communicator.GetBoundedResponse("Please input number of columns.", 2, 100);
 
                 field.CountOfRows = countOfRows;
                 field.CountOfColumns = countOfColumns;
                 field.CountIteration = 0;
-                logic.SetUpField(field);
+                _gameLogic.SetUpField(field);
             }
          
             while (true)
             {                
                 Console.Clear();
                 Console.SetCursorPosition(0, 0);
-                logic.GetNextGeneration(field);
-                print.ShowIteration(field);
-                logic.CountAliveCells(field);
+                _gameLogic.GetNextGeneration(field);
+                _display.ShowIteration(field);
 
-                object aliveCellsCount = logic.CountAliveCells(field);
+                _gameLogic.CountAliveCells(field);
+                object aliveCellsCount = _gameLogic.CountAliveCells(field);
                 Console.WriteLine($"The count of alive cells is {aliveCellsCount}.");
+
                 field.CountIteration++;
                 Console.WriteLine($"The count of iterations is {field.CountIteration}.");
 
                 Thread.Sleep(1000);
-                converter.SaveData(field);
+                _serializer.SaveData(field);
 
                 if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {

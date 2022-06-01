@@ -2,8 +2,11 @@
 
 Console.Title = $"Game Of Life.";
 
-var gameManager = new GameManager(new Communicator(), new Display(), new GameLogic(), new Serializer());
+var serializer = new Serializer();
+var communicator = new Communicator();
+var gameManager = new GameManager(communicator,new Display(), new GameLogic(), serializer);
 
-IApplicationManager running = new ApplicationManager(gameManager);
+IApplicationManager running = new ApplicationManager();
 
-running.RunApplication(new GameField(), new Communicator(), new Serializer());
+running.RunApplication(communicator, serializer, gameManager);
+
