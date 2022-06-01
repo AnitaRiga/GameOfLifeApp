@@ -10,3 +10,4 @@ IApplicationManager running = new ApplicationManager();
 
 running.RunApplication(communicator, serializer, gameManager);
 
+
