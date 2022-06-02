@@ -12,7 +12,7 @@ namespace GameOfLifeApp
         /// </summary>
         public void SetUpField(IGameField field)
         {                
-            Random rnd = new Random();
+            Random random = new Random();
 
             bool[,] InitialField = new bool[field.CountOfRows, field.CountOfColumns];
 
@@ -20,7 +20,7 @@ namespace GameOfLifeApp
             {
                 for (int column = 0; column < field.CountOfColumns; column++)
                 {
-                    InitialField[row, column] = rnd.Next(0, 2) == 0;
+                    InitialField[row, column] = random.Next(0, 2) == 0;
                 }
             }
             field.CurrentField = InitialField;
@@ -29,13 +29,13 @@ namespace GameOfLifeApp
         /// <summary>
         /// Populates the field with Glider the Shape. 
         /// </summary>
-        public void CreateGliderShape(IGameField pr)
+        public void CreateGliderShape(IGameField field)
         {
-            pr.CurrentField[0, 0] = true;
-            pr.CurrentField[2, 0] = true;
-            pr.CurrentField[1, 1] = true;
-            pr.CurrentField[2, 1] = true;
-            pr.CurrentField[1, 2] = true;
+            field.CurrentField[0, 0] = true;
+            field.CurrentField[2, 0] = true;
+            field.CurrentField[1, 1] = true;
+            field.CurrentField[2, 1] = true;
+            field.CurrentField[1, 2] = true;
         }
 
         /// <summary>
@@ -47,37 +47,14 @@ namespace GameOfLifeApp
         private int NeighboursCount(IGameField field, int currentRow, int currentColumn)
         {
             int count = 0;
-            int actualRow;
-            int actualColumn;
 
             for (int row = currentRow - 1; row <= currentRow + 1; row++)
             {
                 for (int column = currentColumn - 1; column <= currentColumn + 1; column++)
                 {
-                    if (row < 0)
-                    {
-                        actualRow = field.CurrentField.GetLength(0) - 1;
-                    }
-                    else if (row == field.CurrentField.GetLength(0))
-                    {
-                        actualRow = 0;
-                    }
-                    else
-                    {
-                        actualRow = row;
-                    }
-                    if (column < 0)
-                    {
-                        actualColumn = field.CurrentField.GetLength(1) - 1;
-                    }
-                    else if (column == field.CurrentField.GetLength(1))
-                    {
-                        actualColumn = 0;
-                    }
-                    else
-                    {
-                        actualColumn = column;
-                    }
+                    int actualRow = (row + field.CurrentField.GetLength(0)) % field.CurrentField.GetLength(0);
+                    int actualColumn = (column + field.CurrentField.GetLength(1)) % field.CurrentField.GetLength(1);
+
                     count += field.CurrentField[actualRow, actualColumn] ? 1 : 0;
                 }
             }
