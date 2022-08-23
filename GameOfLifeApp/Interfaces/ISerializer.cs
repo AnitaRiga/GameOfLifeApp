@@ -18,5 +18,7 @@ namespace GameOfLifeApp
         /// reads all characters from the current position to the end of the stream and returns them as a single string.
         /// <returns>Field.</returns>
         GameField Load();
+
+    void SaveAllGames(List<IGameField> games, IGameField field);
     }
 }

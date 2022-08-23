@@ -20,5 +20,7 @@ namespace GameOfLifeApp
         /// Informs about the response options and requests a response from a user.
         /// </summary>
         void StartPage();
+
+        List<int> GetGamesId(string message);
     }
 }
