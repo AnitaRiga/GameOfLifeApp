@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameOfLifeApp
+﻿namespace GameOfLifeApp
 {
   /// <summary>
   /// Manages a game.
@@ -10,6 +8,9 @@ namespace GameOfLifeApp
     /// <summary>
     /// Manages the running app.
     /// </summary>
+    /// <param name="communicator">The object of class Communicator = injecting the dependency object through the constructor.</param>
+    /// <param name="serializer">The object of class Serializer</param>
+    /// <param name="gameManager">The object of class GameManager </param>
     public void RunApplication(ICommunicator communicator, ISerializer serializer, IGameManager gameManager)
     {
       GameField field = new GameField();

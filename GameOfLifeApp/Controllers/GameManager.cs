@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Linq;
-
-namespace GameOfLifeApp
+﻿namespace GameOfLifeApp
 {
   /// <summary>
   /// Starts iteration.
@@ -76,6 +72,7 @@ namespace GameOfLifeApp
     /// Runs 1000 games in parallel &  shows the selected games on the screen.
     /// </summary>
     /// <param name="games">Game fields.</param>
+    /// <param name="field">Game field.</param>
     /// <param name="isNewGame">Whether the games are new or the stopped games.</param>
     public void RunMultipleGames(List<IGameField> games, IGameField field, bool isNewGame)
     {
@@ -94,15 +91,13 @@ namespace GameOfLifeApp
         }
       }
 
-      List<int> gamesToShow = _communicator.GetGamesId("Please choose 8 games for displaying.");
-      List<IGameField> games8 = new List<IGameField>();
+      List<int> gamesIdsToShow = _communicator.GetGamesId("Please choose 8 games for displaying.");
+      List<IGameField> gameFieldsToShow = new List<IGameField>();
 
-      for (int i = 0; i < gamesToShow.Count; i++)
+      for (int i = 0; i < gamesIdsToShow.Count; i++)
       {
-        games8.Add(games[gamesToShow[i]]);
+        gameFieldsToShow.Add(games[gamesIdsToShow[i]]);
       }
-
-      //field.CountIteration = 0;
 
       while (true)
       {
@@ -113,29 +108,29 @@ namespace GameOfLifeApp
         int totalAliveCellsCount = 0;
         int totalLiveGamesCount = 0;
 
-        field.CountIteration++;        
+        field.CountIteration++;
 
         foreach (var gameField in games)
         {
           _gameLogic.GetNextGeneration(gameField);
           _gameLogic.CountAliveCells(gameField);
-          object aliveCellsCount = _gameLogic.CountAliveCells(gameField);
+          int aliveCellsCount = _gameLogic.CountAliveCells(gameField);
           int aliveCell = int.Parse(aliveCellsCount.ToString());
-          totalAliveCellsCount += int.Parse(aliveCellsCount.ToString());
+          totalAliveCellsCount += aliveCellsCount;
           if (aliveCell > 0)
           {
-            totalLiveGamesCount++;            
+            totalLiveGamesCount++;
           }
         }
 
-        for (int i = 0; i < gamesToShow.Count; i++)
+        for (int i = 0; i < gamesIdsToShow.Count; i++)
         {
-          _gameLogic.CountAliveCells(games8[i]);
-          object aliveCellsCount = _gameLogic.CountAliveCells(games8[i]);
-          displayedAliveCellsCount += int.Parse(aliveCellsCount.ToString());
+          _gameLogic.CountAliveCells(gameFieldsToShow[i]);
+          int aliveCellsCount = _gameLogic.CountAliveCells(gameFieldsToShow[i]);
+          displayedAliveCellsCount += aliveCellsCount;
         }
 
-        _display.ShowMultipleIteration(games8);
+        _display.ShowMultipleIteration(gameFieldsToShow);
 
         Console.WriteLine($"The count of iterations is {field.CountIteration}.");
         Console.WriteLine($"The count of alive cells in 8 displayed games is {displayedAliveCellsCount}.");

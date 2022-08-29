@@ -43,7 +43,7 @@
       int rowLength = listGames[0].CountOfRows;
       int columnHeight = listGames[0].CountOfColumns;
       int counter = -1;
-      
+
       int firstArrayIndex = 0;
       int secondArrayIndex = 0;
 
@@ -55,11 +55,11 @@
           {
             if (row == 0 && column == 0)
             {
-                firstArrayIndex = ++counter;
+              firstArrayIndex = ++counter;
             }
 
             Console.ForegroundColor = listGames[firstArrayIndex].CurrentField[row, column] ? ConsoleColor.Red : ConsoleColor.White;
-            Console.Write(listGames[firstArrayIndex].CurrentField[row, column] ? emoji : " -");                   
+            Console.Write(listGames[firstArrayIndex].CurrentField[row, column] ? emoji : " -");
           }
 
           Console.Write("\t");

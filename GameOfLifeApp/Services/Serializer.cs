@@ -6,7 +6,7 @@ namespace GameOfLifeApp
   /// Saves JSON data to a file.    
   /// </summary>
   public class Serializer : ISerializer
-  {    
+  {
     // Declaring a private string. Get the complete path of the current working directory. Using CurrentDirectory property of Environment class.
     private string _fileName = $"{Environment.CurrentDirectory}\\GameData.json";
 
@@ -53,14 +53,14 @@ namespace GameOfLifeApp
       {
         string serializedGames = JsonConvert.SerializeObject(games);
         string serializedCountOfIteration = JsonConvert.SerializeObject(field.CountIteration);
-        var ser = new JsonSerializer();
+        var serializer = new JsonSerializer();
         foreach (var item in games)
         {
-          ser.Serialize(writer, "Count Of Rows: " + item.CountOfRows);
-          ser.Serialize(writer, "Count Of Columns: " + item.CountOfColumns);
-          ser.Serialize(writer, "Current Field:");
-          ser.Serialize(writer, item.CurrentField);
-          ser.Serialize(writer, "Count Of Iterations: " + field.CountIteration);
+          serializer.Serialize(writer, "Count Of Rows: " + item.CountOfRows);
+          serializer.Serialize(writer, "Count Of Columns: " + item.CountOfColumns);
+          serializer.Serialize(writer, "Current Field:");
+          serializer.Serialize(writer, item.CurrentField);
+          serializer.Serialize(writer, "Count Of Iterations: " + field.CountIteration);
           writer.Write(Environment.NewLine);
         }
       }
