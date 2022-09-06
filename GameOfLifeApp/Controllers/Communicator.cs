@@ -56,7 +56,7 @@ namespace GameOfLifeApp
 
             for (int userId = 0; userId <= 7; userId++)
             {
-                int inputId = GetBoundedResponse("Input Id Games to be displayed", 0, 999);
+                int inputId = GetBoundedResponse(Messages.inputOfGamesId, 0, 999);
                 gamesId.Add(inputId);
             }
 
@@ -68,7 +68,7 @@ namespace GameOfLifeApp
         /// </summary>
         public void StartPage()
         {
-            Console.WriteLine(Messages.chooseOption);
+            Console.WriteLine(Messages.gameOptions);
         }
     }
 }

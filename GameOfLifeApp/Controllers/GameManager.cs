@@ -35,8 +35,9 @@
         {
             if (isNewGame)
             {
-                int countOfRows = _communicator.GetBoundedResponse($"Please input number of rows from {minCountOfRowsOrColumns} to {maxCountOfRowsOrColumns}.", minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
-                int countOfColumns = _communicator.GetBoundedResponse($"Please input number of rows from {minCountOfRowsOrColumns} to {maxCountOfRowsOrColumns}.", minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
+                int countOfRows = _communicator.GetBoundedResponse(Messages.userInputOfCountOfRows, minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
+                int countOfColumns = _communicator.GetBoundedResponse(Messages.userInputOfCountOfColumns, minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
+
 
                 field.CountOfRows = countOfRows;
                 field.CountOfColumns = countOfColumns;
@@ -78,8 +79,9 @@
         {
             if (isNewGame)
             {
-                int countOfRows = _communicator.GetBoundedResponse($"Please input number of rows from {minCountOfRowsOrColumns} to {maxCountOfRowsOrColumns}.", minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
-                int countOfColumns = _communicator.GetBoundedResponse($"Please input number of columns from {minCountOfRowsOrColumns} to {maxCountOfRowsOrColumns}.", minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
+                int countOfRows = _communicator.GetBoundedResponse(Messages.userInputOfCountOfRows, minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
+                int countOfColumns = _communicator.GetBoundedResponse(Messages.userInputOfCountOfColumns, minCountOfRowsOrColumns, maxCountOfRowsOrColumns);
+
                 for (int gameNumber = 0; gameNumber < 1000; gameNumber++)
                 {
                     IGameField gameField = new GameField();
