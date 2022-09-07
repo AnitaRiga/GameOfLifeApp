@@ -17,6 +17,11 @@
         /// <returns>Field.</returns>
         GameField Load();
 
+        /// <summary>
+        /// Creates a StreamWriter and adds some text to the writer using StreamWriter.
+        /// </summary>
+        /// <param name="games">Saves the data of the object 'games'.</param>
+        /// <param name="field">Saves the data of the object 'field'.</param>
         void SaveAllGames(List<IGameField> games, IGameField field);
     }
 }

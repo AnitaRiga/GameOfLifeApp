@@ -63,8 +63,8 @@
                     }
 
                     Console.Write("\t");
-                    for (int column = 0; column < columnHeight; column++)
 
+                    for (int column = 0; column < columnHeight; column++)
                     {
                         if (row == 0 && column == 0)
                         {
@@ -86,5 +86,3 @@
         }
     }
 }
-
-

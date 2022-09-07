@@ -45,7 +45,7 @@ namespace GameOfLifeApp
         }
 
         /// <summary>
-        /// Gets ID of games from user.
+        /// Gets ID of games from a user.
         /// </summary>
         /// <param name="message">Requests to provide ID of games.</param>
         /// <returns>List of games` ID.</returns>

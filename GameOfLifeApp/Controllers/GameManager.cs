@@ -138,10 +138,12 @@
                 Console.WriteLine($"The count of alive cells in 8 displayed games is {displayedAliveCellsCount}.");
                 Console.WriteLine($"The count of alive cells in total is {totalAliveCellsCount}.");
                 Console.WriteLine($"The count of live games is {totalLiveGamesCount}.");
+
                 if (totalAliveCellsCount < 1)
                 {
                     Console.WriteLine("No live games.");
                 }
+
                 Thread.Sleep(1000);
                 _serializer.SaveAllGames(games, field);
 

@@ -9,5 +9,3 @@ var gameManager = new GameManager(communicator, new Display(), new GameLogic(), 
 IApplicationManager running = new ApplicationManager();
 
 running.RunApplication(communicator, serializer, gameManager);
-
-

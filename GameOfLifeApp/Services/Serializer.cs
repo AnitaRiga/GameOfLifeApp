@@ -51,9 +51,8 @@ namespace GameOfLifeApp
             using (StreamWriter writer = File.CreateText(_fileName))
 
             {
-                string serializedGames = JsonConvert.SerializeObject(games);
-                string serializedCountOfIteration = JsonConvert.SerializeObject(field.CountIteration);
                 var serializer = new JsonSerializer();
+
                 foreach (var item in games)
                 {
                     serializer.Serialize(writer, "Count Of Rows: " + item.CountOfRows);
