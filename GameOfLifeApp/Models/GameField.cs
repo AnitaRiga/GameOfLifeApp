@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace GameOfLifeApp
+﻿namespace GameOfLifeApp
 {
     /// <summary>
     /// Holds data about the current field.
     /// </summary>
     public class GameField : IGameField
-    {        
+    {
         /// <summary>
         /// Holds user data of array size.    
         /// </summary>        

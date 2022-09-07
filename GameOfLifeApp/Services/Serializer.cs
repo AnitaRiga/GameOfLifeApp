@@ -31,14 +31,38 @@ namespace GameOfLifeApp
         public GameField Load()
         {
             GameField field = new GameField();
-            
+
             using (StreamReader sr = File.OpenText(_fileName))
-                {
-                    string fileText = sr.ReadToEnd();
-                    field = JsonConvert.DeserializeObject<GameField>(fileText);                    
-                }
-            
+            {
+                string fileText = sr.ReadToEnd();
+                field = JsonConvert.DeserializeObject<GameField>(fileText);
+            }
+
             return field;
+        }
+
+        /// <summary>
+        /// Creates a StreamWriter and adds some text to the writer using StreamWriter.
+        /// </summary>
+        /// <param name="games">Saves the data of the object 'games'.</param>
+        /// <param name="field">Saves the data of the object 'field'.</param>
+        public void SaveAllGames(List<IGameField> games, IGameField field)
+        {
+            using (StreamWriter writer = File.CreateText(_fileName))
+
+            {
+                var serializer = new JsonSerializer();
+
+                foreach (var item in games)
+                {
+                    serializer.Serialize(writer, "Count Of Rows: " + item.CountOfRows);
+                    serializer.Serialize(writer, "Count Of Columns: " + item.CountOfColumns);
+                    serializer.Serialize(writer, "Current Field:");
+                    serializer.Serialize(writer, item.CurrentField);
+                    serializer.Serialize(writer, "Count Of Iterations: " + field.CountIteration);
+                    writer.Write(Environment.NewLine);
+                }
+            }
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameOfLifeApp
+﻿namespace GameOfLifeApp
 {
     /// <summary>
     /// Requests info from  user. Sends a message about incorrect input.
@@ -20,5 +18,12 @@ namespace GameOfLifeApp
         /// Informs about the response options and requests a response from a user.
         /// </summary>
         void StartPage();
+
+        /// <summary>
+        /// Gets ID of games from a user.
+        /// </summary>
+        /// <param name="message">Requests to provide ID of games.</param>
+        /// <returns>List of games` ID.</returns>
+        List<int> GetGamesId(string message);
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameOfLifeApp
+﻿namespace GameOfLifeApp
 {
     /// <summary>
     /// Manages a game.

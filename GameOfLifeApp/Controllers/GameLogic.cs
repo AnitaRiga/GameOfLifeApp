@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameOfLifeApp 
+﻿namespace GameOfLifeApp
 {
     /// <summary>
     /// Generates fields.
@@ -11,7 +9,7 @@ namespace GameOfLifeApp
         /// Generates a start array of random values according to user`s input.
         /// </summary>
         public void SetUpField(IGameField field)
-        {                
+        {
             Random random = new Random();
 
             bool[,] InitialField = new bool[field.CountOfRows, field.CountOfColumns];
@@ -27,7 +25,7 @@ namespace GameOfLifeApp
         }
 
         /// <summary>
-        /// Populates the field with Glider the Shape. 
+        /// Populates the field with Glider the Shape.
         /// </summary>
         public void CreateGliderShape(IGameField field)
         {
@@ -58,8 +56,8 @@ namespace GameOfLifeApp
                     count += field.CurrentField[actualRow, actualColumn] ? 1 : 0;
                 }
             }
-            count -= field.CurrentField[currentRow, currentColumn] ? 1 : 0;
 
+            count -= field.CurrentField[currentRow, currentColumn] ? 1 : 0;
             return count;
         }
 
@@ -79,6 +77,7 @@ namespace GameOfLifeApp
             {
                 return true;
             }
+
             return false;
         }
 

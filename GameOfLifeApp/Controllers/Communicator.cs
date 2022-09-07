@@ -1,4 +1,4 @@
-﻿using System;
+﻿using GameOfLifeApp;
 
 namespace GameOfLifeApp
 {
@@ -6,9 +6,7 @@ namespace GameOfLifeApp
     /// Requests info from  user. Sends a message about incorrect input.
     /// </summary>
     public class Communicator : ICommunicator
-    {
-        const string userInputCheck = "Please make sure whether you have entered a number more than {0} and less than {1}." + "\n" + "Press any key to continue.";
-       
+    {        
         /// <summary>
         /// Gets data from user.
         /// </summary>
@@ -40,10 +38,29 @@ namespace GameOfLifeApp
                 }
                 else
                 {
-                    Console.WriteLine(string.Format(userInputCheck, minValue, maxValue));
+                    Console.WriteLine(string.Format(Messages.userInputCheck, minValue, maxValue));
                     Console.ReadKey();
                 }
             } while (true);
+        }
+
+        /// <summary>
+        /// Gets ID of games from a user.
+        /// </summary>
+        /// <param name="message">Requests to provide ID of games.</param>
+        /// <returns>List of games` ID.</returns>
+        public List<int> GetGamesId(string message)
+        {
+            Console.WriteLine(message);
+            List<int> gamesId = new List<int>();
+
+            for (int userId = 0; userId <= 7; userId++)
+            {
+                int inputId = GetBoundedResponse(Messages.inputOfGamesId, 0, 999);
+                gamesId.Add(inputId);
+            }
+
+            return gamesId;
         }
 
         /// <summary>
@@ -51,13 +68,7 @@ namespace GameOfLifeApp
         /// </summary>
         public void StartPage()
         {
-            Console.WriteLine();
-            const string option = "Please select 1 for running a game" + "\n" + 
-                "2 for saving the data." + "\n" +
-                "3 for continuing the last saved game." + "\n" +
-                "If you want to stop the game, please press the Enter key." + "\n" + 
-                "If you want to leave the game, please press the Enter key twice.";
-            Console.WriteLine(option);
+            Console.WriteLine(Messages.gameOptions);
         }
     }
 }

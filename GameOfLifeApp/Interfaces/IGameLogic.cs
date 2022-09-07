@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameOfLifeApp
+﻿namespace GameOfLifeApp
 {
     /// <summary>
     /// Generates fields.
@@ -27,4 +25,3 @@ namespace GameOfLifeApp
         int CountAliveCells(IGameField field);
     }
 }
- 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameOfLifeApp
+﻿namespace GameOfLifeApp
 {
     /// <summary>
     /// Saves JSON data to a file.    
@@ -18,5 +16,12 @@ namespace GameOfLifeApp
         /// reads all characters from the current position to the end of the stream and returns them as a single string.
         /// <returns>Field.</returns>
         GameField Load();
+
+        /// <summary>
+        /// Creates a StreamWriter and adds some text to the writer using StreamWriter.
+        /// </summary>
+        /// <param name="games">Saves the data of the object 'games'.</param>
+        /// <param name="field">Saves the data of the object 'field'.</param>
+        void SaveAllGames(List<IGameField> games, IGameField field);
     }
 }
